@@ -7,10 +7,10 @@ export const getGifs = async ({
 }) => {
   const url = `https://api.giphy.com/v1/gifs/search?q=${encodeURI(
     category
-  )}&limit=${limit}&api_key=${category}`;
+  )}&limit=${limit}&api_key=nwOFBaF17PZ4YKGk21x1hKLMtxUH7j3a`;
+  console.log({ url });
   const response = await fetch(url);
   const { data } = await response.json();
-  console.log("Get gifs >> ", { data });
 
   return data.map(
     ({
