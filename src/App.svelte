@@ -7,6 +7,7 @@
   import Divider from "./components/ui/Divider.svelte";
 
   let categories: CategoryType[] = [];
+  let error = false;
 
   const onSubmitHandler: svelte.JSX.EventHandler<
     SubmitEvent,
@@ -17,16 +18,22 @@
 
     if (category.trim().length < 3) return;
 
-    getGifs({ category }).then((data) => {
-      categories = [
-        ...categories,
-        {
-          id: uuidv4(),
-          category,
-          gifs: data,
-        },
-      ];
-    });
+    getGifs({ category })
+      .then((data) => {
+        categories = [
+          ...categories,
+          {
+            id: uuidv4(),
+            category,
+            gifs: data,
+          },
+        ];
+
+        error = false;
+      })
+      .catch(() => {
+        error = true;
+      });
   };
 </script>
 
@@ -34,7 +41,7 @@
   <h1 class="text-3xl font-bold animate-pulse">Gif Expert App</h1>
   <Divider variant="lg" />
 
-  <SearchForm {onSubmitHandler} />
+  <SearchForm bind:error {onSubmitHandler} />
   <Divider variant="lg" />
 
   {#if categories.length > 0}
