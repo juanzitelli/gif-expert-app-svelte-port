@@ -1,4 +1,8 @@
-# Svelte + TS + Vite
+# Gif Expert App (Svelte edition)
+
+> This app port was inspired by the Gif Expert App (React edition) that was included in the ["React, de cero a experto"](https://www.udemy.com/course/react-cero-experto/) udemy course by @klerith [Fernando Herrera].
+
+# Svelte's default README content.
 
 This template should help get you started developing with Svelte and TypeScript in Vite.
 
@@ -43,6 +47,6 @@ If you have state that's important to retain within a component, consider creati
 ```ts
 // store.ts
 // An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+import { writable } from "svelte/store";
+export default writable(0);
 ```
