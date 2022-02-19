@@ -3,6 +3,8 @@
   import Category from "./components/Category.svelte";
   import type { Category as CategoryType } from "./_types";
   import { getGifs } from "./lib";
+  import SearchForm from "./components/SearchForm.svelte";
+  import Divider from "./components/ui/Divider.svelte";
 
   let categories: CategoryType[] = [];
 
@@ -12,6 +14,8 @@
   > = (event) => {
     const formData = new FormData(event.currentTarget);
     const category = formData.get("search") as string;
+
+    if (category.trim().length < 3) return;
 
     getGifs({ category }).then((data) => {
       categories = [
@@ -26,17 +30,20 @@
   };
 </script>
 
-<h1>Gif Expert App</h1>
+<div class="container mx-auto p-10">
+  <h1 class="text-3xl font-bold animate-pulse">Gif Expert App</h1>
+  <Divider variant="lg" />
 
-<form on:submit|preventDefault={onSubmitHandler}>
-  <label for="search">
-    Search for gifs 🤞
-    <input type="text" id="search" name="search" />
-  </label>
-  <button type="submit">Submit</button>
-</form>
+  <SearchForm {onSubmitHandler} />
+  <Divider variant="lg" />
 
-{#each categories as category (category.id)}
-  <Category {...category} />
-  <hr />
-{/each}
+  {#if categories.length > 0}
+    <section>
+      <h2 class="text-2xl font-bold">Results</h2>
+      {#each categories as category (category.id)}
+        <Category {...category} />
+        <Divider variant="md" />
+      {/each}
+    </section>
+  {/if}
+</div>

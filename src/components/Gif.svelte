@@ -1,9 +1,12 @@
 <script lang="ts">
+  import Divider from "./ui/Divider.svelte";
+
   export let title: string;
   export let url: string;
 </script>
 
-<article>
-  <h4>{title}</h4>
-  <img height="100" width="100" src={url} alt={title} />
-</article>
+<div>
+  <h4 class="text-lg font-bold">{title}</h4>
+  <Divider variant="sm" />
+  <img class="rounded-lg" src={url} alt={title} />
+</div>
