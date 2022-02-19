@@ -6,8 +6,9 @@
   export let gifs: GifType[];
 </script>
 
+<h3 class="text-xl font-bold text-gray-500">Category: "{category}"</h3>
+<Divider variant="sm" />
 <article class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
-  <h3 class="text-xl font-bold text-gray-500">{category}</h3>
   {#each gifs as gif (gif.id)}
     <Gif {...gif} />
   {/each}
